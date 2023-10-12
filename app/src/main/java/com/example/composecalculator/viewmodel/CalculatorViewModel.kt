@@ -24,11 +24,28 @@ class CalculatorViewModel(
         Log.d(TAG, "action entered $action")
 
         when(action) {
-            CalculatorAction.Calculate -> calculate()
+            CalculatorAction.Calculate -> {
+                val dateValid = state.number1 != ""
+                        && state.operation != null
+                        && state.number2 != ""
+
+                if (dateValid) {
+                    val divideByZeroError = state.number2.toInt() == 0
+                    if (!divideByZeroError) {
+                        calculate()
+                    } else {
+                        state = CalculatorState(number1 = "Error")
+                    }
+                }
+            }
             CalculatorAction.Clear -> state = CalculatorState()
             CalculatorAction.Decimal -> handleDecimal()
             CalculatorAction.Delete -> handleDelete()
-            is CalculatorAction.Number -> handleNumber(action.number)
+            is CalculatorAction.Number -> {
+                handleNumber(action.number)
+
+
+            }
             is CalculatorAction.Operation -> {
                 if (state.number1 != "") {
                     state = state.copy(operation = action.operation)
@@ -86,8 +103,8 @@ class CalculatorViewModel(
     }
     private fun handleDecimal() {
         when (whichNumberToOperateOn()) {
-            1 -> { state = state.copy(number1 = state.number1 + ".0") }
-            2 -> { state = state.copy(number2 = state.number2 + ".0") }
+            1 -> { state = state.copy(number1 = state.number1 + ".") }
+            2 -> { state = state.copy(number2 = state.number2 + ".") }
         }
     }
 

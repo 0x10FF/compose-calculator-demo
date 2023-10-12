@@ -270,7 +270,7 @@ fun CalculatorScreen(
                 CalculatorButton(
                     symbol = "0",
                     modifier = Modifier
-                        .weight(2f)
+                        .weight(3f)
                         .defaultMinSize(minHeight = 80.dp),
                     onClick = {
                         onActionHandler(
@@ -278,17 +278,18 @@ fun CalculatorScreen(
                         )
                     }
                 )
-                CalculatorButton(
-                    symbol = ".",
-                    modifier = Modifier
-                        .weight(1f)
-                        .defaultMinSize(minHeight = 80.dp),
-                    onClick = {
-                        onActionHandler(
-                            CalculatorAction.Decimal
-                        )
-                    }
-                )
+                //TODO Fix / Improve decimal handling
+//                CalculatorButton(
+//                    symbol = ".",
+//                    modifier = Modifier
+//                        .weight(1f)
+//                        .defaultMinSize(minHeight = 80.dp),
+//                    onClick = {
+//                        onActionHandler(
+//                            CalculatorAction.Decimal
+//                        )
+//                    }
+//                )
                 CalculatorButton(
                     symbol = "=",
                     buttonColor = OrangeColor,
